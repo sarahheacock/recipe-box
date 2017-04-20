@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import RecipeBox from './containers/RecipeBox';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
