@@ -37,7 +37,7 @@ const initialState = {
 const initial = (localStorage.getItem('recipes') !== null) ? {recipes:[...JSON.parse(localStorage.recipes)], selectedRecipeIndex: -1, modalVisible: false} : initialState;
 
 export default function Recipe(state=initial, action){
-  console.log(JSON.parse(localStorage.recipes));
+  //console.log(JSON.parse(localStorage.recipes));
   switch(action.type) {
 
     case RecipeActionTypes.ADD_RECIPE: {
