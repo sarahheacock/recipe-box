@@ -1,5 +1,5 @@
 import * as RecipeActionTypes from '../actiontypes/recipe';
-import loadState from '../localStorage';
+//import loadState from '../localStorage';
 
 const initialState = {
   recipes: [
@@ -34,7 +34,7 @@ const initialState = {
   modalVisible: false,
 };
 
-const initial = (loadState !== 'undefined') ? {recipes:[...JSON.parse(localStorage.recipes)], selectedRecipeIndex: -1, modalVisible: false} : initialState;
+const initial = (localStorage.getItem('recipes') !== null) ? {recipes:[...JSON.parse(localStorage.recipes)], selectedRecipeIndex: -1, modalVisible: false} : initialState;
 
 export default function Recipe(state=initial, action){
   console.log(JSON.parse(localStorage.recipes));
