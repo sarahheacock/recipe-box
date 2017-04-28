@@ -18,6 +18,7 @@ export default class AddRecipeForm extends Component {
     super(props);
     this.state = {
       recipe: props.selectedRecipe,
+      ingredients: props.selectedRecipe.ingredients.toString(),
       index: props.selectedRecipe.index,
       modalVisible: props.modalVisible
     };
@@ -33,6 +34,7 @@ export default class AddRecipeForm extends Component {
     //if(nextProps.selectedRecipe.modalVisible === true){
       this.setState({
         recipe: nextProps.selectedRecipe,
+        ingredients: nextProps.selectedRecipe.ingredients.toString(),
         index: nextProps.selectedRecipe.index,
         modalVisible: nextProps.modalVisible
       });
@@ -62,7 +64,7 @@ export default class AddRecipeForm extends Component {
   };
 
   onIngredientChange = (e) => {
-    this.state.recipe.ingredients = e.target.value;
+    this.state.ingredients = e.target.value;
     this.setState( this.state );
   };
 
@@ -76,7 +78,7 @@ export default class AddRecipeForm extends Component {
     const sentRecipe = {
       title: this.state.recipe.title,
       image: this.state.recipe.image,
-      ingredients: this.state.recipe.ingredients.split(','),
+      ingredients: this.state.ingredients.split(','),
       directions: this.state.recipe.directions,
     };
     console.log(sentRecipe);
@@ -123,7 +125,7 @@ export default class AddRecipeForm extends Component {
 
           <textarea rows='3' className="form-control form-area"
             type="text"
-            value={this.state.recipe.ingredients}
+            value={this.state.ingredients}
             onChange={this.onIngredientChange}
             placeholder="Ingredients (Separated By Commas)"
             required
