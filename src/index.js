@@ -1,19 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { compose, createStore } from 'redux';
-//import persistState from 'redux-localstorage';
+import { compose, createStore} from 'redux';
 import RecipeReducer from './reducers/recipe';
 import RecipeBox from './containers/RecipeBox';
+
+
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap-theme.css';
+
+
 import './index.css';
- // const enhancer = compose(
- //   persistState()
- // );
+
+ export const saveState = (state) => {
+   try {
+     const serializedState = JSON.stringify(state);
+     localStorage.setItem('recipes', serializedState);
+   } catch (err) {
+     // Ignore write errors.
+   }
+ };
 
 const store = createStore(
   RecipeReducer,
-  //enhancer
 );
+
+store.subscribe(() => {
+  saveState(store.getState().recipes);
+});
 
 ReactDOM.render(
   <Provider store={store}>

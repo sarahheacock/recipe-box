@@ -8,6 +8,9 @@ import Header from '../components/Header';
 import Recipe from '../components/Recipe';
 import AddRecipeForm from '../components/AddRecipeForm';
 
+var FaHeart = require('react-icons/lib/fa/heart');
+var FaCoffee = require('react-icons/lib/fa/coffee');
+
 
 class RecipeBox extends Component {
   static propTypes = {
@@ -30,15 +33,21 @@ class RecipeBox extends Component {
       selectedRecipe['index'] = selectedRecipeIndex;
     }
     else {
-      selectedRecipe = {title: '', index: selectedRecipeIndex};
+      selectedRecipe = {title: '', ingredients: '', image: '', directions: '', index: selectedRecipeIndex};
     }
+
+    // let visible = modalVisible;
+    // if(modalVisible === 'undefined') visible = false
 
 
     const recipeArray = recipes.map((recipe, index) => (
       <Recipe
         index={index}
         key={index}
-        title={recipe.title}
+        recipe={recipe}
+        ingredients={recipe.ingredients.map((ingredient, index) => (
+          <li key={ingredient}>{ingredient}</li>
+        ))}
         deleteRecipe={deleteRecipe}
         selectRecipe={selectRecipe}
         toggleModal={toggleModal}
@@ -46,18 +55,24 @@ class RecipeBox extends Component {
     ));
     console.log("main", selectedRecipe);
     return (
-      <div>
-        <Header/>
-        <div>
+      <div className="container-fluid">
+      <div className="">
+        <Header
+          modalVisible={modalVisible}
+          toggleModal={toggleModal}
+        />
+        <div className="flex-container">
           {recipeArray}
         </div>
-        <button onClick={() => {toggleModal(modalVisible);}}>Add Recipe</button>
+
         <AddRecipeForm
           addRecipe={addRecipe}
           selectedRecipe={selectedRecipe}
           modalVisible={modalVisible}
           toggleModal={toggleModal}
         />
+      </div>
+      <footer className="text-center">This page was built with <FaHeart id="heart"/> and <FaCoffee id="coffee"/> <br /> by Sarah Heacock.</footer>
       </div>
     );
   }

@@ -7,12 +7,16 @@ import React, { PropTypes } from 'react';
 //edit recipes
 const Header = (props) => {
   return (
-    <div>
+    <div className="text-center jumbotron">
       <h1>Recipe Box</h1>
+      <button className="btn btn-primary" onClick={() => {props.toggleModal(props.modalVisible);}}>Add Recipe</button>
     </div>
   );
 }
 
-
+Header.propTypes = {
+  modalVisible: PropTypes.bool.isRequired,
+  toggleModal: PropTypes.func.isRequired,
+}
 
 export default Header;
